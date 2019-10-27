@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+{% if user.is_authenticated %}
+<p><a href="{% url 'create'%}" class="btn btn-primary">NEW</a></p>
+{% endif %}
+
+<div class="row">
+    <div class="col-lg-8 col-md-10 mx-auto">
+    {% for blog in object_list %}
+      <div class="post-preview">
+        <a href="{% url 'detail' blog.id %}">
+          <h2 class="post-title">
+            {{ blog.content}}
+          </h2>
+
+        </a><p class="post-meta">{{ blog.posted_date }}</a></p>
+      </div>
+      {% endfor %}
+    </div>
+</div>
+
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+
+    {% if page_obj.has_previous %}
+      <li>
+        <a href="?page=={{ page_obj.previous_page_number }}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+    {% endif %}
+
+    {% for page in paginator.page_range %}
+      <li{% if page == page_obj.number %} class="active" {% endif %}><a href="?page={{ page }}">{{ page }}</a></li>
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <li>
+        <a href="?page=={{ page_obj.next_page_number }}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    {% endif %}
+        </ul>
+      </nav>
+
+{% endblock %}

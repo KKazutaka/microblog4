@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div>
+<div>
+    <h2>{{ object.content}}</h2>
+    <p>{{ object.posted_date }}</p>
+</div>
+{% if user.is_authenticated %}
+    <a href="{% url 'update' object.id %}" class="btn btn-primary">編集</a>
+    <a href="{% url 'delete' object.id %}" class="btn btn-danger">削除</a>
+{% endif %}
+
+
+</div>
+{% endblock %}
