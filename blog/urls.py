@@ -1,5 +1,5 @@
 from django.urls import path,include
-from .views import BlogListView,BlogDetailView,BlogCreateView,BlogUpdateView,BlogDeleteView
+from .views import BlogListView,BlogDetailView,BlogCreateView,BlogUpdateView,BlogDeleteView,profilefunc
 from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
@@ -11,5 +11,8 @@ urlpatterns = [
     
     path('login/',LoginView.as_view(template_name="login.html"), name="login"),
     path('logout',LogoutView.as_view(template_name="logout.html"), name="logout"),
+
+    path('profile',profilefunc,name="profile"),
+
 
 ]
